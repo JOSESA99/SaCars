@@ -1,4 +1,3 @@
-```java
 package com.sacars.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
@@ -76,4 +75,3 @@ public class EliminarCarritoHandler implements HttpHandler {
         enviarRespuesta(exchange, 500, response);
     }
 }
-```
