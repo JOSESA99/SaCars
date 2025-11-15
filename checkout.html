@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - SaCars</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="site-header compacto">
+        <div class="contenedor contenido-header">
+            <div class="barra">
+                <a href="index.html">
+                    <img class="logo" src="img/logoprincipal.png" alt="Logotipo de SaCars">
+                </a>
+                <nav class="navegacion">
+                    <a href="index.html">Inicio</a>
+                    <a href="catalogo.html">Catálogo</a>
+                    <a href="mas-sobre-nosotros.html">Más sobre nosotros</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+                <a href="carrito.html" class="carrito-icono">
+                    <img src="img/carritocompras.png" alt="Icono de carrito de compras">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="contenedor seccion checkout-container">
+        <h2 class="centrar-texto">Finalizar Compra</h2>
+
+        <div class="checkout-layout">
+            <div class="checkout-resumen">
+                <h3>📦 Tu Pedido</h3>
+                <div id="checkout-productos" class="checkout-productos-lista">
+                </div>
+                
+                <div class="checkout-totales">
+                    <div class="total-linea">
+                        <span>Subtotal:</span>
+                        <span id="checkout-subtotal">S/ 0.00</span>
+                    </div>
+                    <div class="total-linea">
+                        <span>Envío:</span>
+                        <span id="checkout-envio">Por definir</span>
+                    </div>
+                    <hr>
+                    <div class="total-linea total-final">
+                        <span>Total:</span>
+                        <span id="checkout-total">S/ 0.00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-formulario">
+                <h3>📝 Datos de Entrega</h3>
+                
+                <form id="form-checkout">
+                    <div class="form-grupo">
+                        <label for="nombre">Nombre Completo *</label>
+                        <input type="text" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="telefono">Teléfono / WhatsApp *</label>
+                        <input type="tel" id="telefono" name="telefono" required placeholder="942 123 456">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="direccion">Dirección de Entrega *</label>
+                        <textarea id="direccion" name="direccion" required placeholder="Ingresa tu dirección completa con referencias"></textarea>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label for="zona-entrega">Zona de Entrega</label>
+                        <input type="text" id="zona-entrega" name="zona-entrega" readonly>
+                    </div>
+
+                    <div class="checkout-acciones">
+                        <button type="button" id="btn-cambiar-zona" class="boton-amarillo btn-outline">
+                            🔄 Cambiar Zona de Envío
+                        </button>
+                        <button type="submit" class="boton-amarillo btn-lleno">
+                            💬 Enviar Pedido por WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="contenedor">
+            <p class="copyright">Todos los Derechos Reservados SaCars 2025 &copy;</p>
+        </div>
+    </footer>
+
+    <div id="modal-envio" class="modal">
+        <div class="modal-contenido modal-envio-contenido">
+            <span class="modal-cerrar-envio">&times;</span>
+            <div class="modal-envio-body">
+                <h3>Cambiar zona de envío</h3>
+                <p class="modal-envio-descripcion">Selecciona una nueva zona de envío. Esto actualizará el costo total de tu pedido.</p>
+                
+                <div class="zonas-envio">
+                    <div class="zona-item" data-zona="Banda de Shilcayo" data-costo="5">
+                        <div class="zona-info">
+                            <h4>📍 Banda de Shilcayo</h4>
+                            <p class="zona-precio">S/ 5.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zona-item" data-zona="Tarapoto" data-costo="7">
+                        <div class="zona-info">
+                            <h4>📍 Tarapoto</h4>
+                            <p class="zona-precio">S/ 7.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zona-item" data-zona="Morales" data-costo="10">
+                        <div class="zona-info">
+                            <h4>📍 Morales</h4>
+                            <p class="zona-precio">S/ 10.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zona-item zona-otros" data-zona="Otros">
+                        <div class="zona-info">
+                            <h4>📍 Otros lugares de Perú</h4>
+                            <p class="zona-descripcion">Coordina el precio de envío directamente por WhatsApp</p>
+                        </div>
+                        <button class="boton-whatsapp">💬 Contactar por WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

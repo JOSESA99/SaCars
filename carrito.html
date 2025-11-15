@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carrito de Compras - SaCars</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header compacto">
+    <div class="contenedor contenido-header">
+      <div class="barra">
+        <a href="index.html">
+          <img class="logo" src="img/logoprincipal.png" alt="Logotipo de SaCars" />
+        </a>
+
+        <nav class="navegacion">
+          <a href="index.html">Inicio</a>
+          <a href="catalogo.html">Catálogo</a>
+          <a href="mas-sobre-nosotros.html">Más sobre nosotros</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+
+        <div class="nav-auth">
+          <span id="usuario-conectado" style="display:none; color: #333; margin-right: 15px;">
+              👤 <strong id="nombre-usuario"></strong>
+          </span>
+          <a href="#" id="btn-login" class="btn-login-header">🔐 Ingresar</a>
+          <a href="#" id="btn-logout" class="btn-logout-header" style="display:none;">🚪 Salir</a>
+        </div>
+
+        <a href="carrito.html" class="carrito-icono">
+          <img src="img/carritocompras.png" alt="Icono de carrito de compras" />
+        </a>
+        
+  </header>
+  <main class="contenedor seccion carrito-simple">
+    <div class="carrito-layout">
+      <div id="carrito-contenido" class="carrito-productos">
+        <p class="centrar-texto carrito-vacio">Tu carrito está vacío 🛒</p>
+      </div>
+      <aside class="carrito-resumen">
+        <h3>Resumen de compra</h3>
+        <div id="wstp-mensaje" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #161B22; border-radius: 6px; border: 1px solid #F7BF2E;">
+          <p style="font-size: 1.4rem; color: #F7BF2E; margin:0;">
+             ¡Listo para finalizar! Haz clic en "Finalizar Compra" para completar tu pedido.
+          </p>
+        </div>
+        <div class="carrito-datos">
+          <p>Subtotal: <span id="subtotal">S/ 0.00</span></p>
+          <p>Costo de envío: <span id="costo-envio-texto">Por definir</span></p>
+          <hr />
+          <p class="carrito-total-texto">Total: <span id="total-precio">S/ 0.00</span></p>
+        </div>
+        <button id="finalizar-compra" class="boton-amarillo btn-lleno"> Finalizar Compra</button>
+        <button id="seguir-comprando" class="boton-amarillo btn-outline"> Seguir Comprando</button>
+        <button id="vaciar-carrito" class="boton-amarillo btn-outline"> Vaciar Carrito</button>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="contenedor">
+      <p class="copyright">Todos los Derechos Reservados SaCars 2025 &copy;</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

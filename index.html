@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SaCars - La mejor colección de Hot Wheels en Tarapoto. Envíos seguros y mejores precios.">
+    <meta name="keywords" content="Hot Wheels, carritos, colección, Tarapoto, tienda online">
+    <title>SaCars - Colección Hot Wheels | Tienda Online Tarapoto</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="site-header inicio">
+        <div class="contenedor contenido-header">
+            <div class="barra">
+                <a href="index.html">
+                    <img class="logo" src="img/logoprincipal.png" alt="Logo SaCars - Colección Hot Wheels">
+                </a>
+
+                <nav class="navegacion" role="navigation" aria-label="Menú principal">
+                    <a href="index.html">Inicio</a>
+                    <a href="catalogo.html">Catálogo</a>
+                    <a href="mas-sobre-nosotros.html">Más sobre nosotros</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+
+                <div class="nav-auth">
+                    <span id="usuario-conectado" style="display:none; color: #333; margin-right: 15px;">
+                        👤 <strong id="nombre-usuario"></strong>
+                    </span>
+                    <a href="#" id="btn-login" class="btn-login-header">🔐 Ingresar</a>
+                    <a href="#" id="btn-logout" class="btn-logout-header" style="display:none;">🚪 Salir</a>
+                </div>
+
+                <a href="carrito.html" class="carrito-icono" aria-label="Ir al carrito de compras">
+                    <img src="img/carritocompras.png" alt="Carrito de compras">
+                </a>
+            </div>    
+
+            <!-- Texto principal -->
+            <h1>Encuentra tus Hot Wheels favoritos</h1>
+            <p>La mejor colección de carritos en Tarapoto.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="contenedor seccion-nosotros">
+            <h2 class="centrar-texto">Más Sobre Nosotros</h2>
+            <div class="iconos-nosotros">
+                <div class="icono animar"> 
+                    <img src="img/enviosseguros.png" alt="Icono de envíos seguros">
+                    <h3>Envíos Seguros</h3>
+                    <p>Empacamos tus Hot Wheels con máxima protección para que lleguen en perfecto estado a tu casa.</p>
+                </div>
+
+                <div class="icono animar">
+                    <img src="img/mejorprecio.png" alt="Icono de mejor precio">
+                    <h3>El Mejor Precio</h3>
+                    <p>Te ofrecemos precios justos para que puedas hacer crecer tu colección sin gastar de más.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contenedor seccion-destacados">
+            <h2 class="centrar-texto">Autos Destacados</h2>
+
+            <div class="contenedor-destacados">
+                <div class="anuncio animar">
+                    <img src="img/carritodestacado1.png" alt="Hot Wheels Nissan Skyline GT-R">
+                    <div class="contenido-anuncio">
+                        <h3>Nissan Skyline GT-R (R34)</h3>
+                        <p>De la aclamada serie Fast & Furious. Un clásico que no puede faltar.</p>
+                        <p class="precio">S/ 50.00</p>
+                        <button class="boton-amarillo btn-ver-producto"
+                            data-imagen="img/carritodestacado1.png"
+                            data-titulo="Nissan Skyline GT-R (R34)"
+                            data-descripcion="El Nissan Skyline GT-R es una serie de coches deportivos basados en la gama Nissan Skyline, producidos entre 1968 y 2002. La quinta y última generación del automóvil, diseñada por Kozo Watanabe y designada internamente como GF-BNR34 (abreviado como R34), se introdujo en 1999 como sucesor del E-BCNR33 generación del Skyline GT-R. El R34 era más corto y tenía menos voladizo delantero en comparación con sus predecesores"
+                            data-precio="S/ 50.00"
+                            aria-label="Ver producto Nissan Skyline GT-R">
+                            Ver Producto
+                        </button>
+                    </div>
+                </div>
+
+                <div class="anuncio animar">
+                    <img src="img/carritodestacado2.png" alt="Hot Wheels The Dark Knight Batmobile">
+                    <div class="contenido-anuncio">
+                        <h3>The Dark Knight Batmobile</h3>
+                        <p>El icónico vehículo del Caballero de la Noche. Edición especial.</p>
+                        <p class="precio">S/ 35.00</p>
+                        <button class="boton-amarillo btn-ver-producto"
+                            data-imagen="img/carritodestacado2.png"
+                            data-titulo="The Dark Knight Batmobile"
+                            data-descripcion="Este BATMOVIL representado en la película 'EL CABALLERO OSCURO' es un vehículo tipo tanque modificado de un vehículo militar llamado 'el Tumbler'. BATMAN lo usa dos veces en la película. El diseñador de producción de la película lo describió como un BATMOVIL que exhibe "líneas Lamborghini combinadas con funciones de tanque: un vehículo blindado de control de disturbios, completo con ametralladoras que disparan balas de goma y un cañón grande montado en la parte delantera." Este es el Batmóvil más grande de todos los tiempos, fácilmente se extiende por una autopista de tres carriles así que cuidado CIUDAD GOTHAM."
+                            data-precio="S/ 35.00"
+                            aria-label="Ver producto The Dark Knight Batmobile">
+                            Ver Producto
+                        </button>
+                    </div>
+                </div>
+
+                <div class="anuncio animar"> 
+                    <img src="img/carritodestacado3.png" alt="Hot Wheels DeLorean Time Machine"> 
+                    <div class="contenido-anuncio">
+                        <h3>DeLorean Time Machine</h3>
+                        <p>Viaja en el tiempo con esta réplica del auto de Volver al Futuro.</p>
+                        <p class="precio">S/ 40.00</p>
+                        <button class="boton-amarillo btn-ver-producto"
+                            data-imagen="img/carritodestacado3.png"
+                            data-titulo="DeLorean Time Machine"
+                            data-descripcion="El DeLorean Time Machine es el vehículo central de la saga de películas Back to the Future (Volver al Futuro). Fue creado a partir de un DeLorean DMC-12, al que se le agregó el condensador de flujo. Universal Studios construyó tres para la película, llamados A, B y C, que se usaron como el auto Hero el auto de acrobacias y el auto para tomas de interior, respectivamente. Se hicieron algunos adicionales para las películas siguientes."
+                            data-precio="S/ 40.00"
+                            aria-label="Ver producto DeLorean Time Machine">
+                            Ver Producto
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="contenedor">
+            <p class="copyright">Todos los Derechos Reservados SaCars 2025 &copy;</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE LOGIN (NUEVO) -->
+    <div id="modal-login" class="modal" role="dialog" aria-labelledby="modal-login-titulo" aria-hidden="true">
+        <div class="modal-contenido modal-login-contenido">
+            <button class="modal-cerrar" aria-label="Cerrar modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-login-tabs">
+                    <button class="tab-button active" data-tab="login-form">Iniciar Sesión</button>
+                    <button class="tab-button" data-tab="registro-form">Registrarse</button>
+                </div>
+
+                <!-- FORMULARIO LOGIN -->
+                <div id="login-form" class="auth-form active">
+                    <h3 id="modal-login-titulo">Inicia sesión en SaCars</h3>
+                    <form id="form-login">
+                        <div class="form-group">
+                            <label for="login-email">Correo Electrónico</label>
+                            <input type="email" id="login-email" name="email" required placeholder="tu@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">Contraseña</label>
+                            <input type="password" id="login-password" name="password" required placeholder="••••••••">
+                        </div>
+
+                        <button type="submit" class="boton-amarillo btn-login">Iniciar Sesión</button>
+                        <p class="form-error" id="login-error"></p>
+                    </form>
+                </div>
+
+                <!-- FORMULARIO REGISTRO -->
+                <div id="registro-form" class="auth-form">
+                    <h3>Crea tu cuenta en SaCars</h3>
+                    <form id="form-registro">
+                        <div class="form-group">
+                            <label for="registro-nombre">Nombre Completo</label>
+                            <input type="text" id="registro-nombre" name="nombre" required placeholder="Juan Pérez">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registro-email">Correo Electrónico</label>
+                            <input type="email" id="registro-email" name="email" required placeholder="tu@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registro-telefono">Teléfono</label>
+                            <input type="tel" id="registro-telefono" name="telefono" required placeholder="+51 942123456">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registro-password">Contraseña</label>
+                            <input type="password" id="registro-password" name="password" required placeholder="••••••••">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="registro-password2">Confirmar Contraseña</label>
+                            <input type="password" id="registro-password2" name="password2" required placeholder="••••••••">
+                        </div>
+
+                        <button type="submit" class="boton-amarillo btn-registro">Registrarse</button>
+                        <p class="form-error" id="registro-error"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales existentes -->
+    <div id="modal-producto" class="modal" role="dialog" aria-labelledby="modal-titulo" aria-hidden="true">
+        <div class="modal-contenido">
+            <button class="modal-cerrar" aria-label="Cerrar modal">&times;</button>
+            <div class="modal-body">
+                <div class="modal-imagen">
+                    <img id="modal-img" src="" alt="Imagen del producto">
+                </div>
+                <div class="modal-texto">
+                    <h3 id="modal-titulo"></h3>
+                    <p id="modal-descripcion"></p>
+                    <p id="modal-precio" class="precio"></p>
+                    <div class="modal-botones">
+                        <button class="boton-comprar" aria-label="Comprar producto ahora">Comprar Ahora</button>
+                        <button class="boton-agregar" aria-label="Agregar producto al carrito">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-envio" class="modal" role="dialog" aria-labelledby="modal-envio-titulo" aria-hidden="true">
+        <div class="modal-contenido modal-envio-contenido">
+            <button class="modal-cerrar_envio" aria-label="Cerrar modal de envío">&times;</button>
+            <div class="modal-envio-body">
+                <h3 id="modal-envio-titulo">Selecciona tu zona de envío</h3>
+                <p class="modal-envio-descripcion">Elige la zona donde deseas recibir tu pedido. Esta selección aplicará para toda tu compra.</p>
+                
+                <div class="zonas-envio" role="group" aria-label="Opciones de envío">
+                    <div class="zona-item" data-zona="Banda de Shilcayo" data-costo="5">
+                        <div class="zona-info">
+                            <h4>📍 Banda de Shilcayo</h4>
+                            <p class="zona-precio">S/ 5.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zona-item" data-zona="Tarapoto" data-costo="7">
+                        <div class="zona-info">
+                            <h4>📍 Tarapoto</h4>
+                            <p class="zona-precio">S/ 7.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zona-item" data-zona="Morales" data-costo="10">
+                        <div class="zona-info">
+                            <h4>📍 Morales</h4>
+                            <p class="zona-precio">S/ 10.00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="zona-item zona-otros" data-zona="Otros">
+                        <div class="zona-info">
+                            <h4>📍 Otros lugares de Perú</h4>
+                            <p class="zona-descripcion">Coordina el precio de envío directamente por WhatsApp</p>
+                        </div>
+                        <button class="boton-whatsapp" aria-label="Contactar por WhatsApp">💬 Contactar por WhatsApp</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/auth-modal.js"></script>
+</body>
+</html>

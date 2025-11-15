@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - SaCars</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="contenedor">
+            <div class="barra">
+                <a href="index.html">
+                    <img class="logo" src="img/logoprincipal.png" alt="Logotipo de SaCars">
+                </a>
+                <nav class="navegacion">
+                    <a href="index.html">Inicio</a>
+                    <a href="catalogo.html">Catálogo</a>
+                    <a href="mas-sobre-nosotros.html">Más sobre nosotros</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+
+                <div class="nav-auth">
+                    <span id="usuario-conectado" style="display:none; color: #333; margin-right: 15px;">
+                        👤 <strong id="nombre-usuario"></strong>
+                    </span>
+                    <a href="#" id="btn-login" class="btn-login-header">🔐 Ingresar</a>
+                    <a href="#" id="btn-logout" class="btn-logout-header" style="display:none;">🚪 Salir</a>
+                </div>
+
+                <a href="carrito.html" class="carrito-icono">
+                    <img src="img/carritocompras.png" alt="Carrito">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="contenedor seccion">
+        <h2 class="centrar-texto"></h2>
+
+        <div class="bloque-nosotros animar">
+            <div class="bloque-nosotros__texto">
+                <h3>Nuestra Historia</h3>
+                <p><strong>SaCars</strong> nace a partir de un gusto personal, desde muy pequeño siempre me gustó coleccionar carritos Hot Wheels, mi ilusión era tener la mayor cantidad y poder compartirla con los demás</p>
+                <p>Esta pagina tiene la intención de mostrar los carros mas bonitos que tengo y venderlo a las personas interesadas, son carros que tienen más de 5 años, la gran mayoria</p>
+            </div>
+            <div class="bloque-nosotros__imagen">
+                <img src="img/nuestrahistoria.png" alt="Imagen de nuestra historia">
+            </div>
+        </div>
+
+        <div class="bloque-nosotros bloque-nosotros--invertido animar">
+            <div class="bloque-nosotros__imagen">
+                <img src="img/pertenencia.png" alt="Imagen de sentido de pertenencia">
+            </div>
+            <div class="bloque-nosotros__texto">
+                <h3>Sentido de pertenencia</h3>
+                <p>Al considerarme un coleccionista sé la importancia de sentir que un producto tenga calidad, mis carros no estan en un estado premium pero ese sentido de pertenencia lo caracteriza, el hecho de haber pertenecido a momentos especiales de mi vida</p>
+                <p>Los precios son accesibles por la calidad del producto, espero de corazon les guste cada uno de los carros</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="contenedor">
+            <p class="copyright">Todos los Derechos Reservados SaCars 2025 &copy;</p>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

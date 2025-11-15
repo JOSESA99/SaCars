@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SaCars - Panel de Administración">
+    <title>SaCars - Panel Admin</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard-admin.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Admin -->
+        <aside class="sidebar sidebar-admin">
+            <div class="sidebar-header">
+                <img src="../img/logoprincipal.png" alt="Logo SaCars">
+                <h2>SaCars Admin</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="productos.html" class="nav-item">
+                    <span class="icon">📦</span> Productos
+                </a>
+                <a href="pedidos.html" class="nav-item">
+                    <span class="icon">🛒</span> Pedidos
+                </a>
+                <a href="usuarios.html" class="nav-item">
+                    <span class="icon">👥</span> Usuarios
+                </a>
+                <a href="reportes.html" class="nav-item">
+                    <span class="icon">📈</span> Reportes
+                </a>
+                <a href="configuracion.html" class="nav-item">
+                    <span class="icon">⚙️</span> Configuración
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="cerrarSesionAdmin()">
+                    <span class="icon">🚪</span> Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <h1>Panel de Administración</h1>
+                </div>
+                <div class="topbar-right">
+                    <span class="admin-info" id="admin-email">admin@sacars.com</span>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="dashboard-content">
+                <!-- Estadísticas -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon ingresos">💰</div>
+                        <div class="stat-info">
+                            <h3>Ingresos del Mes</h3>
+                            <p class="stat-value" id="ingresos-mes">S/ 0.00</p>
+                            <p class="stat-change">+15% respecto al mes anterior</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon pedidos">📦</div>
+                        <div class="stat-info">
+                            <h3>Pedidos Pendientes</h3>
+                            <p class="stat-value" id="pedidos-pendientes">0</p>
+                            <p class="stat-change">Requieren atención</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon usuarios">👥</div>
+                        <div class="stat-info">
+                            <h3>Clientes Registrados</h3>
+                            <p class="stat-value" id="total-clientes">0</p>
+                            <p class="stat-change">+5 nuevos esta semana</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon productos">📊</div>
+                        <div class="stat-info">
+                            <h3>Productos en Stock</h3>
+                            <p class="stat-value" id="productos-stock">0</p>
+                            <p class="stat-change">Monitorea el inventario</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Acciones Rápidas -->
+                <section class="acciones-rapidas">
+                    <h2>Acciones Rápidas</h2>
+                    <div class="acciones-grid">
+                        <a href="productos.html?action=new" class="accion-card">
+                            <span class="icon">➕</span>
+                            <span>Agregar Producto</span>
+                        </a>
+                        <a href="pedidos.html" class="accion-card">
+                            <span class="icon">📋</span>
+                            <span>Ver Pedidos</span>
+                        </a>
+                        <a href="usuarios.html" class="accion-card">
+                            <span class="icon">🔍</span>
+                            <span>Gestionar Usuarios</span>
+                        </a>
+                        <a href="reportes.html" class="accion-card">
+                            <span class="icon">📊</span>
+                            <span>Generar Reporte</span>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- Tabla de Pedidos Recientes -->
+                <section class="pedidos-recientes">
+                    <h2>Pedidos Recientes</h2>
+                    <table class="tabla-admin">
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-pedidos">
+                            <!-- Se cargará con JavaScript -->
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/auth-admin.js"></script>
+    <script src="../js/dashboard-admin.js"></script>
+</body>
+</html>
