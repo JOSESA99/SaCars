@@ -1,5 +1,4 @@
-const API_URL = 'http://localhost:8080/api'; // Tu backend Java puro en puerto 8080
-
+const API_URL = 'http://localhost:8082/api';
 $(document).ready(function() {
     // Cambiar entre pestañas
     $('.tab-button').click(function() {

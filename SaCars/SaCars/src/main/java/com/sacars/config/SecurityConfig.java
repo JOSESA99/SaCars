@@ -12,31 +12,47 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/index", "/home", "/catalogo", "/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .formLogin(login -> login
-                .loginPage("/auth/login")
-                .defaultSuccessUrl("/catalogo", true)
-                .permitAll()
-            )
-            .logout(logout -> logout
-                .logoutSuccessUrl("/auth/login?logout")
-                .permitAll()
-            )
-            .exceptionHandling(exception -> exception
-                .accessDeniedPage("/error/403")
-            )
-            .csrf(csrf -> csrf.disable()); // Deshabilitar CSRF temporalmente para pruebas
+@Bean
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http.build();
-    }
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+
+            // Rutas públicas del frontend
+            .requestMatchers("/", "/index", "/home", "/catalogo",
+                             "/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
+
+            // Rutas públicas del API para login/registro del cliente
+            .requestMatchers("/api/auth/**").permitAll()
+
+            // API que solo funciona si el cliente está logueado
+            .requestMatchers("/api/cliente/**").authenticated()
+            .requestMatchers("/api/compras/**").authenticated()
+            .requestMatchers("/api/carrito/**").authenticated()
+
+            // Zona administrativa
+            .requestMatchers("/admin/**").hasRole("ADMIN")
+
+            // Cualquier otra ruta requiere autenticación
+            .anyRequest().authenticated()
+        )
+
+        // Login del ADMIN (solo backend)
+        .formLogin(login -> login
+            .loginPage("/auth/login")
+            .defaultSuccessUrl("/admin/dashboard", true)
+            .permitAll()
+        )
+
+        .logout(logout -> logout
+            .logoutSuccessUrl("/")
+            .permitAll()
+        );
+
+    return http.build();
+}
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

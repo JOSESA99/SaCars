@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8081/api'; // Spring Boot en 8081
+const API_URL = 'http://localhost:8082api'; // Spring Boot en 8081
 
 $(document).ready(function() {
     // Abrir modal de login desde botón
