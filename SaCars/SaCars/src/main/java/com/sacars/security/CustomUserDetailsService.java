@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         return new User(
                 usuario.getEmail(),
-                usuario.getContraseña(),
+                usuario.getContrasena(),
                 authorities
         );
     }

@@ -21,7 +21,7 @@ public class Usuario {
     private String email;
     
     @Column(nullable = false)
-    private String contraseña;
+    private String contrasena;
     
     private String telefono;
     private String direccion;

@@ -4,6 +4,7 @@ import com.sacars.dto.UsuarioRegistroDTO;
 import com.sacars.model.Usuario;
 import com.sacars.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,4 +55,11 @@ public class UsuarioService {
     public boolean existePorEmail(String email) {
         return usuarioRepository.existsByEmail(email);
     }
+     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public boolean passwordCoincide(String raw, String encoded) {
+        return passwordEncoder.matches(raw, encoded);
+    }
+
 }

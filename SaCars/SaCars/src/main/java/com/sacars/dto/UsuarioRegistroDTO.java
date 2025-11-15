@@ -21,7 +21,7 @@ public class UsuarioRegistroDTO {
     private String email;
     
     @NotEmpty(message = "La contraseña es obligatoria")
-    private String contraseña;
+    private String contrasena;
     
     private String telefono;
     private String direccion;
@@ -32,7 +32,7 @@ public class UsuarioRegistroDTO {
         usuario.setNombre(this.nombre);
         usuario.setApellido(this.apellido);
         usuario.setEmail(this.email);
-        usuario.setContraseña(this.contraseña); // En producción, esto debería estar encriptado
+        usuario.setContrasena(this.contrasena);
         usuario.setTelefono(this.telefono);
         usuario.setDireccion(this.direccion);
         return usuario;
