@@ -24,11 +24,12 @@ public class AuthApiController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // ---------------- LOGIN ----------------
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
 
         String email = body.get("email");
-        String password = body.get("password");
+        String password = body.get("password"); // viene del frontend
 
         Optional<Usuario> optUser = usuarioService.buscarPorEmail(email);
 
@@ -41,7 +42,7 @@ public class AuthApiController {
 
         Usuario usuario = optUser.get();
 
-        // VALIDAR CONTRASEÑA (contraseña en tu modelo)
+        // VALIDACIÓN REAL DE BCRYPT
         if (!passwordEncoder.matches(password, usuario.getContrasena())) {
             return ResponseEntity.badRequest().body(Map.of(
                     "success", false,
@@ -49,7 +50,7 @@ public class AuthApiController {
             ));
         }
 
-        // RESPUESTA DE LOGIN
+        // RESPUESTA DE LOGIN OK
         Map<String, Object> data = new HashMap<>();
         data.put("usuario", usuario);
         data.put("token", "token-demo");
@@ -60,14 +61,15 @@ public class AuthApiController {
         ));
     }
 
+    // ---------------- REGISTRO ----------------
     @PostMapping("/registro")
     public ResponseEntity<?> registro(@RequestBody Map<String, String> body) {
 
         String nombre = body.get("nombre");
-        String apellido = body.get("apellido"); 
+        String apellido = body.get("apellido");
         String email = body.get("email");
         String telefono = body.get("telefono");
-         String password = body.get("password");
+        String password = body.get("password"); // viene del frontend
 
         if (usuarioService.existePorEmail(email)) {
             return ResponseEntity.badRequest().body(Map.of(
@@ -78,10 +80,10 @@ public class AuthApiController {
 
         UsuarioRegistroDTO dto = new UsuarioRegistroDTO();
         dto.setNombre(nombre);
-        dto.setApellido(apellido); 
+        dto.setApellido(apellido);
         dto.setEmail(email);
         dto.setTelefono(telefono);
-         dto.setContrasena(password);
+        dto.setContrasena(password); // se encripta en el service
 
         Usuario nuevo = usuarioService.guardar(dto);
 

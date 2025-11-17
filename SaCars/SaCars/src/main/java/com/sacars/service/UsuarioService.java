@@ -45,8 +45,8 @@ public class UsuarioService {
         usuario.setApellido(registroDTO.getApellido());
         usuario.setEmail(registroDTO.getEmail());
         usuario.setTelefono(registroDTO.getTelefono());
-        usuario.setDireccion(registroDTO.getDireccion());
-
+        usuario.setDireccion(registroDTO.getDireccion() != null ? registroDTO.getDireccion() : "");
+        
         // Encriptar contraseña
         usuario.setContrasena(passwordEncoder.encode(registroDTO.getContrasena()));
 
