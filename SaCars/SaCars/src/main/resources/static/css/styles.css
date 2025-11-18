@@ -1389,3 +1389,30 @@ a {
 .form-error.show {
     display: block;
 }
+/* Contador del carrito */
+.contador-carrito {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.carrito-icono {
+    position: relative;
+}
+
+/* Botones deshabilitados */
+.boton-comprar:disabled,
+.boton-agregar:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

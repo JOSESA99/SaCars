@@ -35,8 +35,12 @@ $(document).ready(function () {
 
             success: function (response) {
                 if (response.success) {
+                    // ✅ GUARDAR EN LOCALSTORAGE
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('usuario', JSON.stringify(response.data.usuario));
+                    
                     alert("Bienvenido " + response.data.usuario.nombre);
-                    window.location.href = "/catalogo";
+                    window.location.href = "/";  
                 } else {
                     $("#login-error").text(response.message);
                 }
