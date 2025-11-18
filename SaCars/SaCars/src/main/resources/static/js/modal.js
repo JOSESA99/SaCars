@@ -31,10 +31,34 @@ $(document).ready(function() {
         modal.classList.remove('modal-visible');
     }
 
+    // Función para verificar autenticación antes de acciones
+    function verificarYRedirigir() {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = '/auth/login';
+            return false;
+        }
+        return true;
+    }
+
     // DELEGACIÓN DE EVENTOS: Funciona con elementos dinámicos
     document.addEventListener('click', function(e) {
         if (e.target.closest('.btn-ver-producto')) {
             abrirModal(e);
+        }
+        
+        // Comprar ahora - redirigir si no está logueado
+        if (e.target.classList.contains('boton-comprar')) {
+            if (!verificarYRedirigir()) return;
+            // Aquí va la lógica de compra para usuarios logueados
+            alert('Función de compra para usuarios logueados');
+        }
+        
+        // Agregar al carrito - redirigir si no está logueado
+        if (e.target.classList.contains('boton-agregar')) {
+            if (!verificarYRedirigir()) return;
+            // Aquí va la lógica del carrito para usuarios logueados
+            alert('Producto agregado al carrito');
         }
     });
 

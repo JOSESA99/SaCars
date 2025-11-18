@@ -14,22 +14,16 @@ function verificarAutenticacion() {
         $('.btn-login-header').hide();
         $('#btn-logout').show();
         
-        // Habilitar botones de compra
-        $('.boton-comprar, .boton-agregar').prop('disabled', false);
-        
         // Actualizar contador del carrito
         actualizarContadorCarrito();
         
     } else {
-        // USUARIO NO LOGUEADO - Limitar funcionalidades
+        // USUARIO NO LOGUEADO - Solo mostrar UI
         $('#usuario-conectado').hide();
         $('.btn-login-header').show();
         $('#btn-logout').hide();
         
-        // Deshabilitar botones de compra y mostrar tooltip
-        $('.boton-comprar, .boton-agregar').prop('disabled', true)
-            .attr('title', 'Inicia sesión para comprar')
-            .css('opacity', '0.6');
+        // NO DESHABILITAR BOTONES - Se manejará en los eventos
     }
 }
 

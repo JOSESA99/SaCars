@@ -44,6 +44,15 @@ $(document).ready(function(){
     $(".site-header.inicio p").delay(800).animate({opacity: 1, top: 0}, 800);   // Subtítulo aparece después
 });
 
+// FUNCIÓN PARA VERIFICAR AUTENTICACIÓN Y REDIRIGIR
+function verificarYRedirigir() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/auth/login';
+        return false;
+    }
+    return true;
+}
 
 // CARRITO DE COMPRAS
 $(document).ready(function () {
@@ -80,6 +89,9 @@ $(document).ready(function () {
 
   // Evento: Agregar al carrito - Ahora abre modal de envío
   $(document).on("click", ".boton-agregar", function () {
+    // VERIFICAR AUTENTICACIÓN PRIMERO
+    if (!verificarYRedirigir()) return;
+
     // Verificar si ya hay una zona de envío seleccionada
     const zonaEnvio = localStorage.getItem("zonaEnvio");
     
@@ -138,7 +150,7 @@ $(document).ready(function () {
       // Verificar si es compra directa
       if (productoTemporal.esCompraDirecta) {
         // Redirigir al checkout
-        window.location.href = "checkout.html";
+        window.location.href = "/checkout";
       } else {
         // Mostrar aviso normal
         mostrarAviso(`✅ Producto agregado al carrito<br>📍 Envío a ${zona}: S/ ${costo}.00`);
@@ -161,6 +173,9 @@ $(document).ready(function () {
 
   // Evento: Comprar ahora
   $(document).on("click", ".boton-comprar", function () {
+    // VERIFICAR AUTENTICACIÓN PRIMERO
+    if (!verificarYRedirigir()) return;
+
     // Verificar si ya hay una zona de envío seleccionada
     const zonaEnvio = localStorage.getItem("zonaEnvio");
     
@@ -173,7 +188,7 @@ $(document).ready(function () {
     if (zonaEnvio) {
       // Si ya hay zona seleccionada, agregar y ir al checkout
       agregarAlCarrito(producto);
-      window.location.href = "checkout.html";
+      window.location.href = "/checkout";
     } else {
       // Si no hay zona, guardar producto temporal y abrir modal de envío
       productoTemporal = producto;
@@ -264,6 +279,9 @@ $(document).ready(function () {
 $(document).ready(function() {
     // Finalizar compra - ir al checkout
     $('#finalizar-compra').on('click', function() {
+        // VERIFICAR AUTENTICACIÓN PRIMERO
+        if (!verificarYRedirigir()) return;
+
         // Verificar que haya productos en el carrito
         const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
         if (carrito.length === 0) {
@@ -278,12 +296,12 @@ $(document).ready(function() {
             return;
         }
         
-        window.location.href = 'checkout.html';
+        window.location.href = '/checkout';
     });
     
     // Seguir comprando - ir al catálogo
     $('#seguir-comprando').on('click', function() {
-        window.location.href = 'catalogo.html';
+        window.location.href = '/catalogo';
     });
 });
 
