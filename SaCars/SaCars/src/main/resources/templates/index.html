@@ -9,31 +9,32 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header class="site-header inicio">
+    <header class="site-header">
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/">
-                    <img class="logo" src="/img/logoprincipal.png" alt="Logo SaCars - Colección Hot Wheels">
+                    <img class="logo" src="/img/logoprincipal.png" alt="Logotipo de SaCars">
                 </a>
-
-                <nav class="navegacion" role="navigation" aria-label="Menú principal">
+                <nav class="navegacion">
                     <a href="/">Inicio</a>
                     <a href="/catalogo">Catálogo</a>
                     <a href="/mas-sobre-nosotros">Más sobre nosotros</a>
                     <a href="/contacto">Contacto</a>
+                    
+                <a href="/carrito" class="carrito-icono">
+                    <img src="/img/carritocompras.png" alt="Carrito">
+                    <span class="contador-carrito" style="display: none;">0</span>
+                </a>
                 </nav>
 
                 <div class="nav-auth">
-                    <div id="usuario-conectado" style="display:none;">
-                        <div class="user-avatar"></div>
-                        <span id="nombre-usuario"></span>
-                    </div>
-                    <a href="/auth/login" id="btn-login" class="btn-login-header">🔐 Ingresar</a>
+                    <span id="usuario-conectado" style="display:none; color: #333; margin-right: 15px;">
+                        👤 <strong id="nombre-usuario"></strong>
+                    </span>
+                    <a href="/auth/login" class="btn-login-header">🔐 Ingresar</a>
                     <a href="#" id="btn-logout" class="btn-logout-header" style="display:none;">🚪 Salir</a>
-                <a href="/carrito" class="carrito-icono" aria-label="Ir al carrito de compras">
-                    <img src="/img/carritocompras.png" alt="Carrito de compras">
-                </a>
                 </div>
+                </nav>
             </div>
             <!-- Texto principal -->
             <h1>Encuentra tus Hot Wheels favoritos</h1>

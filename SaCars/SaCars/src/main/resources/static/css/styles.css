@@ -411,7 +411,29 @@ a {
         gap: 15px;
         justify-content: center;
     }
-    
+
+    .iconos-nosotros {
+        flex-direction: column;
+    }
+
+    .bloque-nosotros {
+        grid-template-columns: 1fr; /* 1 columna en tablet */
+    }
+
+    .bloque-nosotros--invertido .bloque-nosotros__imagen,
+    .bloque-nosotros--invertido .bloque-nosotros__texto {
+        grid-column: 1 / -1;
+    }
+
+    .modal-body {
+        grid-template-columns: 1fr;
+    }
+
+    .contacto-directo {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .navegacion {
         order: 3;
         width: 100%;
@@ -419,41 +441,23 @@ a {
         margin: 10px 0 0 0;
         gap: 15px;
     }
-    
+
     .navegacion a {
         font-size: 1.6rem;
     }
-    
+
     .logo {
         width: 14rem !important;
     }
-    
+
     .site-header.inicio h1 {
         font-size: 3.5rem;
     }
-    
+
     .site-header.inicio p {
         font-size: 1.6rem;
     }
 }
-    .iconos-nosotros {
-        flex-direction: column;
-    }
-    .bloque-nosotros {
-        grid-template-columns: 1fr; /* 1 columna en tablet */
-    }
-    .bloque-nosotros--invertido .bloque-nosotros__imagen,
-    .bloque-nosotros--invertido .bloque-nosotros__texto {
-        grid-column: 1 / -1; /* Reseteamos el orden */
-    }
-    .modal-body {
-        grid-template-columns: 1fr; /* 1 columna en el modal */
-    }
-    .contacto-directo {
-        flex-direction: column;
-        align-items: center;
-    }
-
 
 @media (max-width: 480px) {
     .navegacion {
@@ -1293,9 +1297,7 @@ a {
 .nav-auth {
     display: flex;
     align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-    min-width: 0;
+    gap: 1.5rem;
 }
 
 
@@ -1505,16 +1507,6 @@ a {
     flex-shrink: 1; /* Permite que se encoja */
 }
 
-/* Ajustar la barra principal */
-.barra {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 15px;
-    padding: 0 15px; /* Añadir padding para mejor espaciado */
-}
-
 /* Responsive para móviles */
 @media (max-width: 768px) {
     #usuario-conectado {
@@ -1546,14 +1538,16 @@ a {
 .btn-login-header {
     background: #FFD700;
     color: #333;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 5px 10px;   /* MÁS PEQUEÑO */
+    border-radius: 10px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 12px;     /* LETRA MÁS CHICA */
     border: 2px solid transparent;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
+
 
 .btn-login-header:hover {
     background: #333;
