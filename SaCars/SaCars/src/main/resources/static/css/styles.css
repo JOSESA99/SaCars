@@ -82,17 +82,20 @@ a {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: nowrap;
+    gap: 20px;
+    position: relative;
 }
 
 .logo {
-    width: 20rem;
+    width: 16rem;
+    flex-shrink: 0;
 }
 .navegacion a {
+    font-size: 1.8rem;
+    white-space: nowrap;
     position: relative;
-    color: #fff;
-    font-size: 2.2rem;
-    font-weight: bold;
-    text-transform: uppercase;
+    padding: 5px 0; /* Añadir padding para mejor área de hover */
 }
 
 .navegacion a::after {
@@ -112,21 +115,28 @@ a {
 .navegacion {
     display: flex;
     gap: 2.5rem;
+    flex-wrap: nowrap;
+    margin: 0 20px;
+    flex-grow: 1;
+    justify-content: center;
 }
 .carrito-icono img {
-    width: 5rem;
+    width: 3.5rem !important; /* Más pequeño */
+    height: 3.5rem;
 }
 
 /*Contenido del Header de la página de Inicio*/
-.site-header.inicio h2 {
-    margin-top: 1rem; /* menos espacio hacia arriba */
+.site-header.inicio h1 {
+    margin-top: 1rem;
     font-size: 5rem;
     font-weight: 900;
+    text-align: center;
 }
 
 .site-header.inicio p {
     margin-top: 0.5rem;
     font-size: 2rem;
+    text-align: center;
 }
 .site-header .boton {
     display: block;
@@ -396,10 +406,36 @@ a {
 /*MEDIA QUERIES*/
 @media (max-width: 768px) {
     .barra {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
+        flex-wrap: wrap;
+        padding: 1rem 2rem;
+        gap: 15px;
+        justify-content: center;
     }
+    
+    .navegacion {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin: 10px 0 0 0;
+        gap: 15px;
+    }
+    
+    .navegacion a {
+        font-size: 1.6rem;
+    }
+    
+    .logo {
+        width: 14rem !important;
+    }
+    
+    .site-header.inicio h1 {
+        font-size: 3.5rem;
+    }
+    
+    .site-header.inicio p {
+        font-size: 1.6rem;
+    }
+}
     .iconos-nosotros {
         flex-direction: column;
     }
@@ -417,7 +453,7 @@ a {
         flex-direction: column;
         align-items: center;
     }
-}
+
 
 @media (max-width: 480px) {
     .navegacion {
@@ -442,7 +478,8 @@ a {
         align-items: center;
     }
     .logo {
-        width: 14rem;
+    width: 16rem !important; /* Un poco más pequeño */
+    max-width: 160px;
     }
     .carrito-icono img {
         width: 4rem;
@@ -1256,21 +1293,24 @@ a {
 .nav-auth {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin: 0 20px;
+    gap: 12px;
+    flex-shrink: 0;
+    min-width: 0;
 }
 
+
 .btn-login-header, .btn-logout-header {
-    padding: 8px 15px;
+    padding: 6px 12px;
     background: #f7bf2e;
     color: #333;
     text-decoration: none;
     border-radius: 5px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .btn-login-header:hover, .btn-logout-header:hover {
@@ -1280,14 +1320,24 @@ a {
 }
 
 #usuario-conectado {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 2px solid #FFD700;
     font-size: 14px;
-    color: #333;
+    font-weight: bold;
+    color: #333 !important;
+    white-space: nowrap;
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media (max-width: 768px) {
-    .nav-auth {
-        gap: 10px;
-        margin: 0 10px;
+    .barra {
+        flex-wrap: wrap;
+        padding: 1rem 2rem;
+        gap: 15px;
     }
 
     .btn-login-header, .btn-logout-header {
@@ -1415,4 +1465,136 @@ a {
 .boton-agregar:disabled {
     cursor: not-allowed;
     opacity: 0.6;
+}
+/* Estilos para el usuario conectado */
+#usuario-conectado {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 2px solid #FFD700;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333 !important;
+    white-space: nowrap;
+    max-width: 150px; /* Reducido para mejor ajuste */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Mostrar solo el primer nombre */
+#nombre-usuario {
+    color: #333 !important;
+    font-weight: bold;
+    /* Esta propiedad asegura que solo muestre el primer nombre */
+    display: inline-block;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Mejorar la barra de navegación para nombres largos */
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0; /* Permite que se reduzca */
+    flex-shrink: 1; /* Permite que se encoja */
+}
+
+/* Ajustar la barra principal */
+.barra {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 0 15px; /* Añadir padding para mejor espaciado */
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+    #usuario-conectado {
+        max-width: 120px;
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+    
+    #nombre-usuario {
+    color: #333 !important;
+    font-weight: bold;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+    
+    .nav-auth {
+        gap: 6px;
+    }
+    
+    .user-avatar {
+        width: 20px;
+        height: 20px;
+        font-size: 10px;
+    }
+}
+
+/* Estilos para botones de auth */
+.btn-login-header {
+    background: #FFD700;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-login-header:hover {
+    background: #333;
+    color: #FFD700;
+    border-color: #FFD700;
+}
+
+.btn-logout-header {
+    background: #333;
+    color: #FFD700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #FFD700;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-logout-header:hover {
+    background: #FFD700;
+    color: #333;
+}
+/* Estilo para el carrito dentro de la navegación */
+.navegacion .carrito-icono {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.navegacion .carrito-icono img {
+    width: 3rem !important;
+    height: 3rem;
+    transition: transform 0.3s ease;
+}
+
+.navegacion .carrito-icono:hover img {
+    transform: scale(1.1);
+}
+
+/* Quitar el subrayado del carrito */
+.navegacion .carrito-icono::after {
+    display: none !important;
 }

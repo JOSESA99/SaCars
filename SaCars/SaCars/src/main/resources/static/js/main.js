@@ -349,3 +349,68 @@ function limpiarSesion() {
     localStorage.removeItem('usuario');
     localStorage.removeItem('rol');
 }
+// Función para mostrar solo el primer nombre - VERSIÓN MEJORADA
+function mostrarPrimerNombre() {
+    const elementoNombre = document.getElementById('nombre-usuario');
+    
+    if (elementoNombre) {
+        let nombreCompleto = elementoNombre.textContent.trim();
+        
+        // SIEMPRE mostrar solo el primer nombre, incluso si ya es corto
+        const primerNombre = nombreCompleto.split(' ')[0];
+        elementoNombre.textContent = primerNombre;
+        
+        // Actualizar avatar con la inicial
+        const avatar = document.querySelector('.user-avatar');
+        if (avatar) {
+            avatar.textContent = primerNombre.charAt(0).toUpperCase();
+        }
+        
+        console.log('Nombre procesado:', primerNombre); // Para debug
+    }
+}
+
+// Ejecutar cuando la página cargue y también después de la verificación de autenticación
+document.addEventListener('DOMContentLoaded', function() {
+    // Ejecutar inmediatamente
+    mostrarPrimerNombre();
+    
+    // Y también después de que jQuery termine de cargar
+    $(document).ready(function() {
+        setTimeout(mostrarPrimerNombre, 100);
+    });
+});
+
+// También ejecutar después de la verificación de autenticación
+function verificarAutenticacion() {
+    const usuario = localStorage.getItem('usuario');
+    const token = localStorage.getItem('token');
+
+    if (usuario && token) {
+        try {
+            const usuarioObj = JSON.parse(usuario);
+            
+            // Mostrar nombre del usuario
+            $('#usuario-conectado').show();
+            $('#nombre-usuario').text(usuarioObj.nombre);
+            
+            // PROCESAR EL NOMBRE INMEDIATAMENTE DESPUÉS DE ASIGNARLO
+            setTimeout(mostrarPrimerNombre, 50);
+            
+            // Mostrar botón logout
+            $('#btn-login').hide();
+            $('#btn-logout').show().off('click').click(function(e) {
+                e.preventDefault();
+                cerrarSesion();
+            });
+        } catch (e) {
+            console.error('Error al parsear usuario:', e);
+            limpiarSesion();
+        }
+    } else {
+        // Usuario no autenticado
+        $('#usuario-conectado').hide();
+        $('#btn-logout').hide();
+        $('#btn-login').show();
+    }
+}

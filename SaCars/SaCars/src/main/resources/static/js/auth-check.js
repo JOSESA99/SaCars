@@ -10,7 +10,14 @@ function verificarAutenticacion() {
     if (token && usuario) {
         // USUARIO LOGUEADO - Mostrar funcionalidades completas
         $('#usuario-conectado').show();
-        $('#nombre-usuario').text(usuario.nombre);
+        
+        // LIMITAR NOMBRE A 15 CARACTERES
+        let nombreMostrar = usuario.nombre || 'Usuario';
+        if (nombreMostrar.length > 15) {
+            nombreMostrar = nombreMostrar.substring(0, 15) + '...';
+        }
+        $('#nombre-usuario').text(nombreMostrar);
+        
         $('.btn-login-header').hide();
         $('#btn-logout').show();
         
@@ -22,8 +29,6 @@ function verificarAutenticacion() {
         $('#usuario-conectado').hide();
         $('.btn-login-header').show();
         $('#btn-logout').hide();
-        
-        // NO DESHABILITAR BOTONES - Se manejará en los eventos
     }
 }
 

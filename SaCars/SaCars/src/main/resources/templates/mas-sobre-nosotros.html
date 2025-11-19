@@ -4,39 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros - SaCars</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header class="site-header">
         <div class="contenedor">
             <div class="barra">
-                <a href="index.html">
-                    <img class="logo" src="img/logoprincipal.png" alt="Logotipo de SaCars">
+                <a href="/">
+                    <img class="logo" src="/img/logoprincipal.png" alt="Logotipo de SaCars">
                 </a>
                 <nav class="navegacion">
-                    <a href="index.html">Inicio</a>
-                    <a href="catalogo.html">Catálogo</a>
-                    <a href="mas-sobre-nosotros.html">Más sobre nosotros</a>
-                    <a href="contacto.html">Contacto</a>
+                    <a href="/">Inicio</a>
+                    <a href="/catalogo">Catálogo</a>
+                    <a href="/mas-sobre-nosotros">Más sobre nosotros</a>
+                    <a href="/contacto">Contacto</a>
                 </nav>
 
                 <div class="nav-auth">
                     <span id="usuario-conectado" style="display:none; color: #333; margin-right: 15px;">
                         👤 <strong id="nombre-usuario"></strong>
                     </span>
-                    <a href="#" id="btn-login" class="btn-login-header">🔐 Ingresar</a>
+                    <a href="/auth/login" class="btn-login-header">🔐 Ingresar</a>
                     <a href="#" id="btn-logout" class="btn-logout-header" style="display:none;">🚪 Salir</a>
                 </div>
 
-                <a href="carrito.html" class="carrito-icono">
-                    <img src="img/carritocompras.png" alt="Carrito">
+                <a href="/carrito" class="carrito-icono">
+                    <img src="/img/carritocompras.png" alt="Carrito">
+                    <span class="contador-carrito" style="display: none;">0</span>
                 </a>
             </div>
         </div>
     </header>
 
     <main class="contenedor seccion">
-        <h2 class="centrar-texto"></h2>
+        <h2 class="centrar-texto">Más Sobre Nosotros</h2>
 
         <div class="bloque-nosotros animar">
             <div class="bloque-nosotros__texto">
@@ -45,13 +46,13 @@
                 <p>Esta pagina tiene la intención de mostrar los carros mas bonitos que tengo y venderlo a las personas interesadas, son carros que tienen más de 5 años, la gran mayoria</p>
             </div>
             <div class="bloque-nosotros__imagen">
-                <img src="img/nuestrahistoria.png" alt="Imagen de nuestra historia">
+                <img src="/img/nuestrahistoria.png" alt="Imagen de nuestra historia">
             </div>
         </div>
 
         <div class="bloque-nosotros bloque-nosotros--invertido animar">
             <div class="bloque-nosotros__imagen">
-                <img src="img/pertenencia.png" alt="Imagen de sentido de pertenencia">
+                <img src="/img/pertenencia.png" alt="Imagen de sentido de pertenencia">
             </div>
             <div class="bloque-nosotros__texto">
                 <h3>Sentido de pertenencia</h3>
@@ -66,7 +67,9 @@
             <p class="copyright">Todos los Derechos Reservados SaCars 2025 &copy;</p>
         </div>
     </footer>
+    
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/auth-check.js"></script>
 </body>
 </html>
