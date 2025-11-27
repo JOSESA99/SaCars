@@ -1333,6 +1333,16 @@ a {
     max-width: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#usuario-conectado:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: #FFAD00;
+    box-shadow: 0 2px 8px rgba(255, 173, 0, 0.3);
+    transform: translateY(-2px);
+}
 }
 
 @media (max-width: 768px) {

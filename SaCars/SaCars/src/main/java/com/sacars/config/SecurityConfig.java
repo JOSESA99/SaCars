@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/checkout/**").permitAll()
+                .requestMatchers("/api/usuarios/**").permitAll()
+                .requestMatchers("/api/pedidos/**").permitAll()
                 .requestMatchers("/api/cliente/**").authenticated()
                 .requestMatchers("/api/compras/**").authenticated()
                 .requestMatchers("/api/carrito/**").authenticated()
