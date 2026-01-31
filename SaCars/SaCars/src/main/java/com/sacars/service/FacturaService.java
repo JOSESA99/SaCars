@@ -33,7 +33,7 @@ public class FacturaService {
         factura.setFechaEmision(LocalDateTime.now());
 
         factura.setNombreCliente(usuario.getNombre() + " " + usuario.getApellido());
-        factura.setDniCliente(dniCliente);  // ← CORREGIDO (antes: request.getDniCliente())
+        factura.setDniCliente(dniCliente);
 
         factura.setSubtotal(subtotal);
         factura.setTotal(total);
