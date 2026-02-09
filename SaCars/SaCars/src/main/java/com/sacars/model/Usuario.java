@@ -35,7 +35,12 @@ public class Usuario {
     private boolean activo = true;
     
     public enum RolUsuario {
-        cliente,       // ← minúscula
-        administrador  // ← minúscula
+        cliente,
+        administrador
+    }
+    
+    // Método auxiliar para devolver el rol como String en JSON
+    public String getRolString() {
+        return rol != null ? rol.name() : "cliente";
     }
 }

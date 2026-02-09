@@ -27,39 +27,65 @@ $(document).ready(function () {
         const email = $("#login-email").val();
         const password = $("#login-password").val();
 
+        console.log("Email:", email);
+        console.log("Enviando login...");
+
         $.ajax({
             type: "POST",
             url: API_URL + "/auth/login",
             contentType: "application/json",
             data: JSON.stringify({ email, password }),
 
-        success: function (response) {
+            success: function (response) {
+                console.log("Respuesta del servidor:", response);
 
-            if (response.success) {
+                if (response.success) {
 
-                const u = response.data.usuario;
+                    const u = response.data.usuario;
+                    console.log("Usuario:", u);
 
-                localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("token", response.data.token);
 
-                localStorage.setItem("usuario", JSON.stringify({
-                    id: u.idUsuario,      // ← ESTE ES EL CORRECTO
-                    nombre: u.nombre,
-                    apellido: u.apellido,
-                    correo: u.email,      // ← backend lo manda como "email"
-                    telefono: u.telefono,
-                    dni: u.dni            // ← ya disponible en backend
-                }));
+                    localStorage.setItem("usuario", JSON.stringify({
+                        id: u.idUsuario,
+                        nombre: u.nombre,
+                        apellido: u.apellido,
+                        correo: u.email,
+                        telefono: u.telefono,
+                        dni: u.dni,
+                        rol: u.rol
+                    }));
 
-                alert("Bienvenido " + u.nombre);
-                window.location.href = "/";
+                    // Redirección automática según el rol
+                    alert("Bienvenido " + u.nombre);
+                    console.log("Rol del usuario:", u.rol);
+                    
+                    if (u.rol === 'administrador') {
+                        console.log("Redirigiendo a admin dashboard...");
+                        window.location.href = "/admin/dashboard";
+                    } else if (u.rol === 'cliente') {
+                        console.log("Redirigiendo a cliente dashboard...");
+                        window.location.href = "/cliente/dashboard";
+                    } else {
+                        console.log("Redirigiendo a home...");
+                        window.location.href = "/";
+                    }
 
-            } else {
-                $("#login-error").text(response.message);
-            }
-        },
+                } else {
+                    $("#login-error").text(response.message);
+                }
+            },
 
-            error: function () {
-                $("#login-error").text("Error al conectar con el servidor.");
+            error: function (xhr, status, error) {
+                console.error("Error en login:", xhr.responseText);
+                console.error("Status:", status);
+                console.error("Error:", error);
+                
+                let mensaje = "Error al conectar con el servidor.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    mensaje = xhr.responseJSON.message;
+                }
+                $("#login-error").text(mensaje);
             },
         });
     });

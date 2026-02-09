@@ -15,25 +15,29 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ AGREGAR ESTA LÍNEA
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/index", "/home", "/catalogo",
+                .requestMatchers("/", "/index", "/home", "/catalogo", "/contacto", 
+                                 "/carrito", "/checkout", "/perfil", "/mas-sobre-nosotros",
                                  "/css/**", "/js/**", "/img/**", "/webjars/**").permitAll()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/checkout/**").permitAll()
                 .requestMatchers("/api/usuarios/**").permitAll()
                 .requestMatchers("/api/pedidos/**").permitAll()
+                .requestMatchers("/api/productos/**").permitAll()
+                .requestMatchers("/admin/**", "/cliente/**").permitAll() // Vistas sin protección (protección en APIs)
+                .requestMatchers("/api/admin/**").authenticated()
                 .requestMatchers("/api/cliente/**").authenticated()
                 .requestMatchers("/api/compras/**").authenticated()
                 .requestMatchers("/api/carrito/**").authenticated()
-                .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().permitAll()
             )
             .formLogin(form -> form.disable())

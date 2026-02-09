@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Categorías - SaCars</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard-admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-crud.css}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar-admin">
+            <div class="sidebar-header">
+                <h2>SaCars Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a th:href="@{/admin/dashboard}" class="nav-link">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a th:href="@{/admin/usuarios}" class="nav-link">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a th:href="@{/admin/productos}" class="nav-link">
+                    <span class="icon">🛒</span>
+                    Productos
+                </a>
+                <a th:href="@{/admin/pedidos}" class="nav-link">
+                    <span class="icon">📦</span>
+                    Pedidos
+                </a>
+                <a th:href="@{/admin/categorias}" class="nav-link active">
+                    <span class="icon">📁</span>
+                    Categorías
+                </a>
+                <a th:href="@{/admin/reportes}" class="nav-link">
+                    <span class="icon">📈</span>
+                    Reportes
+                </a>
+                <a th:href="@{/logout}" class="nav-link logout">
+                    <span class="icon">🚪</span>
+                    Salir
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Gestión de Categorías</h1>
+                <div class="user-info">
+                    <span id="adminEmail"></span>
+                </div>
+            </div>
+
+            <!-- Filtros y Búsqueda -->
+            <div class="filtros-section">
+                <div class="search-box">
+                    <input type="text" id="buscarCategoria" placeholder="🔍 Buscar por nombre...">
+                </div>
+                <button class="btn-primary" id="btnNuevaCategoria">
+                    + Nueva Categoría
+                </button>
+            </div>
+
+            <!-- Tabla de Categorías -->
+            <div class="tabla-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Productos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaCategorias">
+                        <tr>
+                            <td colspan="6" class="loading">Cargando categorías...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Crear/Editar Categoría -->
+    <div id="modalCategoria" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tituloModal">Nueva Categoría</h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form id="formCategoria">
+                <input type="hidden" id="idCategoria">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre *</label>
+                    <input type="text" id="nombre" required maxlength="100">
+                    <small>Nombre descriptivo de la categoría</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" rows="4" maxlength="500"></textarea>
+                    <small>Descripción breve de los productos de esta categoría</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="imagenUrl">URL de Imagen</label>
+                    <input type="url" id="imagenUrl" placeholder="https://ejemplo.com/imagen.jpg">
+                    <small>URL completa de la imagen representativa de la categoría</small>
+                </div>
+
+                <!-- Preview de la imagen -->
+                <div class="form-group" id="previewContainer" style="display: none;">
+                    <label>Vista Previa</label>
+                    <img id="previewImagen" src="" alt="Preview" style="max-width: 200px; border-radius: 8px; border: 2px solid #e0e0e0;">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin-categorias.js}"></script>
+</body>
+</html>

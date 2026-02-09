@@ -30,25 +30,52 @@ public class AuthApiController {
         String email = body.get("email");
         String password = body.get("password");
 
-        // ⬇ Ahora buscarPorEmail() devuelve Usuario directamente
-        Usuario usuario = usuarioService.buscarPorEmail(email);
-
-        // Validar contraseña encriptada
-        if (!passwordEncoder.matches(password, usuario.getContrasena())) {
+        // Validar que vengan los datos
+        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of(
                     "success", false,
-                    "message", "Contraseña incorrecta"
+                    "message", "Email y contraseña son requeridos"
             ));
         }
 
-        // Respuesta login OK
-        Map<String, Object> data = new HashMap<>();
-        data.put("usuario", usuario);
-        data.put("token", "token-demo"); // luego lo reemplazamos por JWT real
+        try {
+            // Buscar usuario por email
+            Usuario usuario = usuarioService.buscarPorEmail(email);
 
+            // Validar contraseña encriptada
+            if (!passwordEncoder.matches(password, usuario.getContrasena())) {
+                return ResponseEntity.badRequest().body(Map.of(
+                        "success", false,
+                        "message", "Contraseña incorrecta"
+                ));
+            }
+
+            // Respuesta login OK
+            Map<String, Object> data = new HashMap<>();
+            data.put("usuario", usuario);
+            data.put("token", "token-demo");
+
+            return ResponseEntity.ok(Map.of(
+                    "success", true,
+                    "data", data
+            ));
+            
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of(
+                    "success", false,
+                    "message", "Usuario no encontrado o credenciales incorrectas"
+            ));
+        }
+    }
+
+    // ---------------- GENERAR HASH (TEMPORAL - SOLO PARA DESARROLLO) ----------------
+    @GetMapping("/generar-hash")
+    public ResponseEntity<?> generarHash(@RequestParam String password) {
+        String hash = passwordEncoder.encode(password);
         return ResponseEntity.ok(Map.of(
-                "success", true,
-                "data", data
+                "password", password,
+                "hash", hash,
+                "mensaje", "Copia este hash y úsalo en tu INSERT de SQL"
         ));
     }
 

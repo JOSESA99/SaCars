@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaCars - Gestión de Usuarios</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard-admin.css">
+    <link rel="stylesheet" href="../css/admin-crud.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Admin -->
+        <aside class="sidebar sidebar-admin">
+            <div class="sidebar-header">
+                <img src="../img/logoprincipal.png" alt="Logo SaCars">
+                <h2>SaCars Admin</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard" class="nav-item">
+                    <span class="icon">📊</span> Dashboard
+                </a>
+                <a href="productos" class="nav-item">
+                    <span class="icon">📦</span> Productos
+                </a>
+                <a href="pedidos" class="nav-item">
+                    <span class="icon">🛒</span> Pedidos
+                </a>
+                <a href="usuarios" class="nav-item active">
+                    <span class="icon">👥</span> Usuarios
+                </a>
+                <a href="reportes" class="nav-item">
+                    <span class="icon">📈</span> Reportes
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="cerrarSesionAdmin()">
+                    <span class="icon">🚪</span> Cerrar Sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <h1>👥 Gestión de Usuarios</h1>
+                </div>
+                <div class="topbar-right">
+                    <span class="admin-info" id="admin-email">admin@sacars.com</span>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="dashboard-content">
+                <!-- Filtros y Búsqueda -->
+                <div class="filtros-section">
+                    <div class="search-box">
+                        <input type="text" id="buscar-usuario" placeholder="🔍 Buscar por nombre, email o DNI...">
+                    </div>
+                    <button class="btn-primary" onclick="mostrarModalCrear()">
+                        ➕ Nuevo Usuario
+                    </button>
+                </div>
+
+                <!-- Tabla de Usuarios -->
+                <section class="tabla-section">
+                    <table class="tabla-admin">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>DNI</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-usuarios">
+                            <tr>
+                                <td colspan="8" style="text-align: center; padding: 30px;">
+                                    Cargando usuarios...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para Crear/Editar Usuario -->
+    <div id="modal-usuario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-titulo">Nuevo Usuario</h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form id="form-usuario" onsubmit="guardarUsuario(event)">
+                <input type="hidden" id="usuario-id">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="usuario-nombre">Nombre *</label>
+                        <input type="text" id="usuario-nombre" required maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="usuario-apellido">Apellido *</label>
+                        <input type="text" id="usuario-apellido" required maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="usuario-dni">DNI *</label>
+                        <input type="text" id="usuario-dni" required pattern="\\d{8}" maxlength="8" placeholder="12345678">
+                    </div>
+                    <div class="form-group">
+                        <label for="usuario-telefono">Teléfono</label>
+                        <input type="text" id="usuario-telefono" maxlength="20" placeholder="987654321">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="usuario-email">Email *</label>
+                    <input type="email" id="usuario-email" required maxlength="100">
+                </div>
+
+                <div class="form-group">
+                    <label for="usuario-direccion">Dirección</label>
+                    <textarea id="usuario-direccion" rows="2"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="usuario-rol">Rol *</label>
+                        <select id="usuario-rol" required>
+                            <option value="cliente">Cliente</option>
+                            <option value="administrador">Administrador</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="usuario-activo">Estado *</label>
+                        <select id="usuario-activo" required>
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group" id="grupo-contrasena">
+                    <label for="usuario-contrasena">Contraseña *</label>
+                    <input type="password" id="usuario-contrasena" minlength="6" placeholder="Mínimo 6 caracteres">
+                    <small>Solo necesaria al crear un nuevo usuario</small>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/auth-admin.js"></script>
+    <script src="../js/admin-usuarios.js"></script>
+</body>
+</html>

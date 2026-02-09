@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - SaCars</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard-admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-crud.css}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar-admin">
+            <div class="sidebar-header">
+                <h2>SaCars Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a th:href="@{/admin/dashboard}" class="nav-link">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a th:href="@{/admin/usuarios}" class="nav-link">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a th:href="@{/admin/productos}" class="nav-link active">
+                    <span class="icon">🛒</span>
+                    Productos
+                </a>
+                <a th:href="@{/admin/pedidos}" class="nav-link">
+                    <span class="icon">📦</span>
+                    Pedidos
+                </a>
+                <a th:href="@{/admin/categorias}" class="nav-link">
+                    <span class="icon">📁</span>
+                    Categorías
+                </a>
+                <a th:href="@{/admin/reportes}" class="nav-link">
+                    <span class="icon">📈</span>
+                    Reportes
+                </a>
+                <a th:href="@{/logout}" class="nav-link logout">
+                    <span class="icon">🚪</span>
+                    Salir
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Gestión de Productos</h1>
+                <div class="user-info">
+                    <span id="adminEmail"></span>
+                </div>
+            </div>
+
+            <!-- Filtros y Búsqueda -->
+            <div class="filtros-section">
+                <div class="search-box">
+                    <input type="text" id="buscarProducto" placeholder="🔍 Buscar por nombre o descripción...">
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-secondary" id="btnFiltroStockBajo">
+                        ⚠️ Stock Bajo
+                    </button>
+                    <button class="btn-primary" id="btnNuevoProducto">
+                        + Nuevo Producto
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Productos -->
+            <div class="tabla-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Categoría</th>
+                            <th>Destacado</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaProductos">
+                        <tr>
+                            <td colspan="10" class="loading">Cargando productos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Crear/Editar Producto -->
+    <div id="modalProducto" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tituloModal">Nuevo Producto</h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form id="formProducto">
+                <input type="hidden" id="idProducto">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nombre">Nombre *</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="precio">Precio *</label>
+                        <input type="number" id="precio" step="0.01" min="0" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" rows="3"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stock">Stock Inicial *</label>
+                        <input type="number" id="stock" min="0" value="0" required>
+                        <small>Para modificar stock de producto existente, usar botón "+ Stock"</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idCategoria">Categoría *</label>
+                        <select id="idCategoria" required>
+                            <option value="">Seleccionar categoría</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="imagenUrl">URL de Imagen</label>
+                    <input type="url" id="imagenUrl" placeholder="https://ejemplo.com/imagen.jpg">
+                    <small>URL completa de la imagen del producto</small>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="destacado">Destacado</label>
+                        <select id="destacado">
+                            <option value="false">No</option>
+                            <option value="true">Sí</option>
+                        </select>
+                        <small>Los productos destacados se muestran en la página principal</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="activo">Estado</label>
+                        <select id="activo">
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Stock -->
+    <div id="modalStock" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Agregar Stock</h2>
+                <span class="close" onclick="cerrarModalStock()">&times;</span>
+            </div>
+            <form id="formStock">
+                <input type="hidden" id="idProductoStock">
+                
+                <div class="form-group">
+                    <label id="nombreProductoStock" style="font-size: 16px; color: #666;"></label>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidadStock">Cantidad a Agregar *</label>
+                    <input type="number" id="cantidadStock" min="1" required>
+                    <small>Ingrese la cantidad de unidades a agregar al inventario</small>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="cerrarModalStock()">Cancelar</button>
+                    <button type="submit" class="btn-primary">Agregar Stock</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin-productos.js}"></script>
+</body>
+</html>

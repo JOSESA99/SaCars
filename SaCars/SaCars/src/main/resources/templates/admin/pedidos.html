@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pedidos - SaCars</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard-admin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-crud.css}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar-admin">
+            <div class="sidebar-header">
+                <h2>SaCars Admin</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a th:href="@{/admin/dashboard}" class="nav-link">
+                    <span class="icon">📊</span>
+                    Dashboard
+                </a>
+                <a th:href="@{/admin/usuarios}" class="nav-link">
+                    <span class="icon">👥</span>
+                    Usuarios
+                </a>
+                <a th:href="@{/admin/productos}" class="nav-link">
+                    <span class="icon">🛒</span>
+                    Productos
+                </a>
+                <a th:href="@{/admin/pedidos}" class="nav-link active">
+                    <span class="icon">📦</span>
+                    Pedidos
+                </a>
+                <a th:href="@{/admin/categorias}" class="nav-link">
+                    <span class="icon">📁</span>
+                    Categorías
+                </a>
+                <a th:href="@{/admin/reportes}" class="nav-link">
+                    <span class="icon">📈</span>
+                    Reportes
+                </a>
+                <a th:href="@{/logout}" class="nav-link logout">
+                    <span class="icon">🚪</span>
+                    Salir
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <div class="topbar">
+                <h1>Gestión de Pedidos</h1>
+                <div class="user-info">
+                    <span id="adminEmail"></span>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filtros-section">
+                <div style="display: flex; gap: 15px; flex: 1;">
+                    <div class="form-group" style="margin: 0; min-width: 200px;">
+                        <select id="filtroEstado" style="padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                            <option value="">📋 Todos los estados</option>
+                            <option value="pendiente">⏳ Pendiente</option>
+                            <option value="completado">✅ Completado</option>
+                            <option value="cancelado">❌ Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin: 0; min-width: 200px;">
+                        <select id="filtroZona" style="padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px;">
+                            <option value="">📍 Todas las zonas</option>
+                            <option value="Lima Norte">Lima Norte</option>
+                            <option value="Lima Sur">Lima Sur</option>
+                            <option value="Lima Este">Lima Este</option>
+                            <option value="Lima Centro">Lima Centro</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-primary" id="btnResumenHoy">
+                    📊 Resumen del Día
+                </button>
+            </div>
+
+            <!-- Resumen del día (oculto por defecto) -->
+            <div id="resumenDelDia" style="display: none; background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);">
+                <h3 style="margin: 0 0 15px 0; color: #1a1a2e;">📊 Resumen del Día</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div class="stat-card">
+                        <div class="stat-value" id="resumenPedidos">0</div>
+                        <div class="stat-label">Pedidos Hoy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="resumenCompletados">0</div>
+                        <div class="stat-label">Completados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="resumenPendientes">0</div>
+                        <div class="stat-label">Pendientes</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="resumenTotal">S/ 0.00</div>
+                        <div class="stat-label">Total del Día</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabla de Pedidos -->
+            <div class="tabla-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Fecha y Hora</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Zona</th>
+                            <th>Items</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaPedidos">
+                        <tr>
+                            <td colspan="8" class="loading">Cargando pedidos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Detalle del Pedido -->
+    <div id="modalDetallePedido" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>Detalle del Pedido <span id="numeroPedido"></span></h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <div style="padding: 25px;">
+                <!-- Información del cliente -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 15px 0; color: #1a1a2e;">👤 Información del Cliente</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <strong>Nombre:</strong> <span id="clienteNombre"></span>
+                        </div>
+                        <div>
+                            <strong>Email:</strong> <span id="clienteEmail"></span>
+                        </div>
+                        <div>
+                            <strong>Teléfono:</strong> <span id="clienteTelefono"></span>
+                        </div>
+                        <div>
+                            <strong>Dirección:</strong> <span id="clienteDireccion"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Información del pedido -->
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 15px 0; color: #1a1a2e;">📦 Información del Pedido</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <strong>Fecha:</strong> <span id="pedidoFecha"></span>
+                        </div>
+                        <div>
+                            <strong>Estado:</strong> <span id="pedidoEstado"></span>
+                        </div>
+                        <div>
+                            <strong>Zona:</strong> <span id="pedidoZona"></span>
+                        </div>
+                        <div>
+                            <strong>Total:</strong> <span id="pedidoTotal" style="font-size: 18px; color: #27ae60;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Productos del pedido -->
+                <div>
+                    <h3 style="margin: 0 0 15px 0; color: #1a1a2e;">🛒 Productos</h3>
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 12px; text-align: left;">Producto</th>
+                                <th style="padding: 12px; text-align: center;">Cantidad</th>
+                                <th style="padding: 12px; text-align: right;">Precio Unit.</th>
+                                <th style="padding: 12px; text-align: right;">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productosDetalle">
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Acciones -->
+                <div class="modal-actions" style="margin-top: 25px;">
+                    <button type="button" class="btn-secondary" onclick="cerrarModal()">Cerrar</button>
+                    <button type="button" class="btn-primary" id="btnMarcarCompletado" style="display: none;">
+                        ✅ Marcar como Completado
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin-pedidos.js}"></script>
+</body>
+</html>

@@ -41,12 +41,7 @@ public class HomeController {
         return "mas-sobre-nosotros";
     }
     
-    // Dashboards
-    @GetMapping("/admin/dashboard")
-    public String adminDashboard() {
-        return "admin/dashboard";
-    }
-    
+    // Dashboard Cliente
     @GetMapping("/cliente/dashboard")
     public String clienteDashboard() {
         return "cliente/dashboard";
